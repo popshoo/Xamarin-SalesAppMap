@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SalesApp.Views.DashboardView"
+             xmlns:viewModelBase="clr-namespace:SalesApp.ViewModels.Base;assembly=SalesApp"
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+             Title="Dashboard">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+                Spacing="5"
+                Padding="10"
+                VerticalOptions="Start">
+                <Image Source="logo.PNG" WidthRequest="200"></Image>
+
+                <Label Text="Recent Activity"
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="Large"
+                   FontAttributes="Bold"/>
+
+                <Label Text="{Binding CurrentLocation}"
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="Medium"/>
+
+                <StackLayout HeightRequest="5" />
+
+                <ActivityIndicator IsVisible="{Binding IsBusy}"
+                   IsRunning="True"
+                   IsEnabled="True"/>
+
+
+                <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
+                    <StackLayout HeightRequest="2" BackgroundColor="Black"/>
+
+                    <StackLayout Orientation="Horizontal"
+                             Spacing="20"
+                             Padding="10">
+                        <Image Source="addresses.png"
+                           WidthRequest="75"
+                           HeightRequest="75"/>
+
+                        <Label VerticalOptions="CenterAndExpand"
+                           VerticalTextAlignment="Center"
+                           FontSize="Large"
+                           Text="{Binding RecentAddressesDisplay}"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GotoRecentAddressesCommand}"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <StackLayout HeightRequest="2" BackgroundColor="Black"/>
+
+                    <StackLayout Orientation="Horizontal"
+                             Spacing="20"
+                             Padding="10">
+                        <Image Source="interactions.png"
+                           WidthRequest="75"
+                           HeightRequest="75"/>
+
+                        <Label VerticalOptions="CenterAndExpand"
+                           VerticalTextAlignment="Center"
+                           FontSize="Large"
+                           Text="{Binding RecentInteractionsDisplay}"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GotoRecentAddressesCommand}"/>
+                        </StackLayout.GestureRecognizers>
+
+                    </StackLayout>
+                    <StackLayout HeightRequest="2" BackgroundColor="Black"/>
+
+                    <StackLayout Orientation="Horizontal"
+                             Spacing="20"
+                             Padding="10">
+                        <Image Source="sale.png"
+                           WidthRequest="75"
+                           HeightRequest="75"/>
+
+                        <Label VerticalOptions="CenterAndExpand"
+                           VerticalTextAlignment="Center"
+                           FontSize="Large"
+                           Text="{Binding RecentSalesDisplay}"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GotoRecentSalesCommand}"/>
+                        </StackLayout.GestureRecognizers>
+
+                    </StackLayout>
+
+                    <StackLayout HeightRequest="2" BackgroundColor="Black"/>
+
+                    <StackLayout Orientation="Horizontal"
+                             Spacing="20"
+                             Padding="10">
+                        <Image Source="promising.png"
+                           WidthRequest="75"
+                           HeightRequest="75"/>
+
+                        <Label VerticalOptions="CenterAndExpand"
+                           VerticalTextAlignment="Center"
+                           FontSize="Large"
+                           Text="{Binding RecentPromisingDisplay}"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GotoRecentPromisingCommand}"/>
+                        </StackLayout.GestureRecognizers>
+
+                    </StackLayout>
+                    <StackLayout HeightRequest="2" BackgroundColor="Black"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

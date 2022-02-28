@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModelBase="clr-namespace:SalesApp.ViewModels.Base;assembly=SalesApp"
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+             xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             xmlns:bindings="clr-namespace:Xamarin.Forms.GoogleMaps.Bindings;assembly=Xamarin.Forms.GoogleMaps.Bindings"
+             x:Class="SalesApp.Views.MapView"
+             Title="Map">
+    <ContentPage.Content>
+        <StackLayout>
+           <maps:Map VerticalOptions="FillAndExpand"
+                     MyLocationEnabled="True">
+               <maps:Map.Behaviors>
+                   <bindings:BindingVisibleRegionBehavior Value="{Binding VisibleRegion}"/>
+                   <bindings:MoveToRegionBehavior Request="{Binding MoveToRegionRequest}"/>
+                   <bindings:BindingPinsBehavior Value="{Binding Pins}"/>
+                </maps:Map.Behaviors>
+           </maps:Map>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

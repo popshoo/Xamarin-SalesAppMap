@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SalesApp.Views.MenuView"
+             xmlns:viewModelBase="clr-namespace:SalesApp.ViewModels.Base;assembly=SalesApp"
+             xmlns:behaviors="clr-namespace:SalesApp.Behaviors;assembly=SalesApp"
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true" 
+             Title="Master"
+             Icon="hamburger"
+             BackgroundColor="{StaticResource PrimaryThemeColor}">
+    <Grid BackgroundColor="{StaticResource WhiteColor}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- MENU -->
+        <Grid     
+                Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- PROFILE -->
+            <Grid BackgroundColor="{StaticResource PrimaryThemeColor}"
+                      Grid.Row="0"
+                      ColumnSpacing="20"
+                      Padding="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="AUTO"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        TextColor="{StaticResource WhiteColor}"
+                        Text="{Binding CurrentUser.FullName}"
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                        FontSize="Large"/>
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    TextColor="{StaticResource LightGrayColor}"
+                    Text="{Binding CurrentUser.AgentID}"
+                    HorizontalTextAlignment="Start"
+                    VerticalTextAlignment="Center"
+                    FontSize="Medium"/>
+            </Grid>
+
+            <!-- MENU -->
+            <ListView 
+                BackgroundColor="{StaticResource WhiteColor}"
+                      Grid.Row="1"
+                      SeparatorVisibility="None"
+                      HasUnevenRows="true"
+                      ItemsSource="{Binding MenuItems}"
+                      behaviors:ItemTappedCommandListView.ItemTappedCommand="{Binding ItemSelectedCommand}">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout
+                                    Orientation="Horizontal"
+                                    Margin="28, 9, 0, 9">
+                                <StackLayout.Triggers>
+                                    <DataTrigger
+                                        TargetType="StackLayout"
+                                        Binding="{Binding IsEnabled, Mode=TwoWay}"
+                                        Value="False">
+                                        <Setter Property="Opacity"
+                                                Value="0.6" />
+                                    </DataTrigger>
+                                </StackLayout.Triggers>
+                                <Image 
+                                        Source="{Binding MenuItemType, Converter={StaticResource MenuItemTypeConverter}}"
+                                        Aspect="AspectFit"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center" >
+                                    <Image.WidthRequest>
+                                        <OnPlatform
+                                            x:TypeArguments="x:Double">
+                                            <On Platform="iOS" Value="50"/>
+                                            <On Platform="Android" Value="30"/>
+                                            <On Platform="UWP" Value="30"/>
+                                        </OnPlatform>
+                                    </Image.WidthRequest>
+                                </Image>
+                                <Label 
+                                        Text="{Binding Title}"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        TextColor="{StaticResource PrimaryThemeColor}"
+                                        Margin="5,0,0,0">
+                                    <Label.FontSize>
+                                        <OnPlatform
+                                            x:TypeArguments="x:Double">
+                                            <On Platform="iOS" Value="20"/>
+                                            <On Platform="Android" Value="20"/>
+                                            <On Platform="UWP" Value="20"/>
+                                        </OnPlatform>
+                                    </Label.FontSize>
+                                </Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+
+
+        <!-- LOG OUT -->
+        <Grid Grid.Row="1" BackgroundColor="{StaticResource WhiteColor}">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding LogoutCommand}"/>
+            </Grid.GestureRecognizers>
+
+            <StackLayout
+                Orientation="Horizontal"
+                Margin="28, 9, 0, 28">
+                <Image 
+                    Source="ic_exit_to_app_blue.png"
+                    Aspect="AspectFit"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <Image.WidthRequest>
+                        <OnPlatform
+                            x:TypeArguments="x:Double">
+                            <On Platform="iOS" Value="50"/>
+                            <On Platform="Android" Value="30"/>
+                            <On Platform="UWP" Value="30"/>
+                        </OnPlatform>
+                    </Image.WidthRequest>
+                </Image>
+                <Label 
+                    Text="Log Out"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    TextColor="{StaticResource PrimaryThemeColor}"
+                    Margin="5,0,0,0">
+                    <Label.FontSize>
+                        <OnPlatform
+                            x:TypeArguments="x:Double">
+                            <On Platform="iOS" Value="20"/>
+                            <On Platform="Android" Value="20"/>
+                            <On Platform="UWP" Value="20"/>
+                        </OnPlatform>
+                    </Label.FontSize>
+                </Label>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

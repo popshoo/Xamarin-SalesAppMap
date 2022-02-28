@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SalesApp.Views.LoginView"
+             xmlns:viewModelBase="clr-namespace:SalesApp.ViewModels.Base;assembly=SalesApp"
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+             
+             Title="Login">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10"
+                     VerticalOptions="StartAndExpand">
+                <StackLayout HeightRequest="30"></StackLayout>
+
+                <Image Source="logo.PNG" WidthRequest="300"></Image>
+
+                <StackLayout HeightRequest="15"></StackLayout>
+
+                <Frame CornerRadius="3"
+                       WidthRequest="300"
+                       HorizontalOptions="CenterAndExpand"
+                       Margin="10"
+                       IsVisible="{Binding StatusMessage, Converter={StaticResource StringNullOrEmptyBoolConverter}}"
+                       BackgroundColor="{StaticResource AlertColor}">
+                    <Grid Margin="5"
+                          ColumnSpacing="20"
+                          VerticalOptions="Center">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="alerticon.png"
+                               WidthRequest="40"
+                               HeightRequest="40"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               VerticalOptions="Center"/>
+                        <Label Text="{Binding StatusMessage}"
+                               TextColor="{StaticResource WhiteColor}"
+                               FontAttributes="Bold"
+                               FontSize="Default"
+                               VerticalOptions="Center" 
+                               Grid.Row="0"
+                               Grid.Column="1"/>
+                    </Grid>
+                </Frame>
+
+                <Entry Text="{Binding EmailAddress}"
+                   Placeholder="E-mail Address" 
+                   HorizontalOptions="Center"
+                   WidthRequest="300"
+                   Keyboard="Email"/>
+
+                <StackLayout HeightRequest="2"></StackLayout>
+
+                <Entry Text="{Binding Password}" 
+                   Placeholder="Password"
+                   IsPassword="True"
+                   HorizontalOptions="Center"
+                   WidthRequest="300"/>
+
+                <StackLayout HeightRequest="10"></StackLayout>
+
+                <Button
+                    Text="SIGN IN"    
+                    HorizontalOptions="Center"
+                    WidthRequest="300"
+                    Command="{Binding SignInCommand}"
+                    IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
+                    Style="{StaticResource PrimaryButtonStyle}"/>
+                
+                <ActivityIndicator IsEnabled="True"
+                                IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"                              
+                               Color="Black"
+                               x:Name="LoginLoader">
+                </ActivityIndicator>
+
+
+
+             
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

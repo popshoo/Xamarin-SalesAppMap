@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodelbase="clr-namespace:SalesApp.ViewModels.Base;assembly=SalesApp"
+             viewmodelbase:ViewModelLocator.AutoWireViewModel="true"
+             x:Class="SalesApp.Views.AddAddressInteractionView"
+             Title="Add Data">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+            Spacing="10"
+            Padding="10">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label Text="{Binding Address.Address1}"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       Grid.Row="0"
+                       Grid.Column="0"/>
+
+                    <Label Text="{Binding Address.CityStateZip}"
+                       FontSize="Medium"
+                       Grid.Row="1"
+                       Grid.Column="0"/>
+
+                </Grid>
+                <Label Text="{Binding Address.StatusDisplay}"
+                       FontSize="Medium"/>
+
+
+                <StackLayout HeightRequest="10"/>
+                <Label
+                    FontAttributes="Bold"
+                    Text="Date and Time:"/>
+
+                <DatePicker Date="{Binding Date}"/>
+
+                <TimePicker Time="{Binding Time}"/>
+
+
+
+                <StackLayout HeightRequest="10"/>
+                <Label
+                    FontAttributes="Bold"
+                    Text="Dispositon:"/>
+                <Picker ItemsSource="{Binding InteractionTypes}"
+                        SelectedIndex="{Binding InteractionTypeSelectedIndex}"
+                        ItemDisplayBinding="{Binding Name}"
+                        Title="Customer Interaction"/>
+
+                <Picker ItemsSource="{Binding Products}" 
+                        SelectedIndex="{Binding ProductSelectedIndex}"
+                        ItemDisplayBinding="{Binding Name}"
+                        Title="Product"/>
+
+
+                <StackLayout HeightRequest="10"/>
+                <Label
+                    FontAttributes="Bold"
+                    Text="Notes:"/>
+
+                <Editor Text="{Binding Note}"
+                    HeightRequest="100"/>
+
+
+                <StackLayout HeightRequest="10"/>
+
+                <Button Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding SaveInteractionCommand}"
+                        Text="Save"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

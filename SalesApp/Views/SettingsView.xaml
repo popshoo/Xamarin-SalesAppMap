@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:base="clr-namespace:SalesApp.ViewModels.Base;assembly=SalesApp"
+             base:ViewModelLocator.AutoWireViewModel="true"
+             x:Class="SalesApp.Views.SettingsView">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+            Spacing="10"
+            Padding="10">
+
+                <StackLayout HeightRequest="10"/>
+
+                <Image HorizontalOptions="Center"
+                   Source="{Binding User.UserIconUrl}"
+                   WidthRequest="100"
+                   HeightRequest="100"/>
+
+                <Label HorizontalTextAlignment="Center"
+                   Text="{Binding User.FullName}"
+                   FontSize="Large"
+                   FontAttributes="Bold"/>
+
+                <Label HorizontalTextAlignment="Center"
+                   Text="{Binding User.AgentID}"
+                   FontSize="Medium"/>
+
+                <StackLayout HeightRequest="10"/>
+
+
+                <Label HorizontalTextAlignment="Center"
+                       Text="Current Location"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+
+                <Label HorizontalTextAlignment="Center"
+                       Text="{Binding Location.Display}"
+                       FontSize="Medium"/>
+
+
+                <StackLayout HeightRequest="20"/>
+
+
+                <StackLayout WidthRequest="200"
+                             Spacing="10"
+                             HorizontalOptions="Center">
+
+                    <Button Text="Re-Detect Location"
+                            Command="{Binding DetectLocationCommand}"
+                            Style="{StaticResource PrimaryButtonStyle}"/>
+
+                    <Button Text="Change Password"
+                            Style="{StaticResource PrimaryButtonStyle}"/>
+
+                    <Button Text="Log Out"
+                            Command="{Binding LogoutCommand}"
+                            Style="{StaticResource PrimaryButtonStyle}"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
