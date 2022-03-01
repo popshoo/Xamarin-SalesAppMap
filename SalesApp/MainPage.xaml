@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:SalesApp"
              x:Class="SalesApp.MainPage">
 
-	<Label Text="Welcome to Xamarin.Forms!" 
+	<Label Text="Bienvenidos a Niggas Naions!" 
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
 

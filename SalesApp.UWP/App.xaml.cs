@@ -58,7 +58,7 @@ namespace SalesApp.UWP
                     typeof(Xamarin.Forms.GoogleMaps.UWP.MapRenderer).GetTypeInfo().Assembly
                 };
                 Xamarin.Forms.Forms.Init(e, rendererAssemblies);
-                Xamarin.FormsGoogleMaps.Init("api_k");
+                Xamarin.FormsGoogleMaps.Init("AIzaSyAOkDtRuViR1dfUT3LvrD2IM4qY7vgL3wc");
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
